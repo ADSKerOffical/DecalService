@@ -22,8 +22,11 @@ function DecalService:FindPartWithId(id)
  local isdeaca = nil
   for _, part in ipairs(workspace:GetDescendants()) do
     if part:IsA("BasePart") then
-isdeaca = part
- break
+       local cdecal = part:FindFirstChildOfClass("Decal") or part:FindFirstChildOfClass("Texture") or nil
+      if cdecal and cdecal.Texture == id then
+     isdeaca = part
+        break
+      end
     end
   end
  if isdeaca == nil then
