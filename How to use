@@ -1,0 +1,14 @@
+-- Get this first
+local DecalService = loadstring(game:HttpGet("https://raw.githubusercontent.com/ADSKerOffical/DecalService/refs/heads/main/Script.lua"))() or game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/ADSKerOffical/DecalService/refs/heads/main/Script.lua")
+
+-- Example GetImageFromId:
+local Decal = script.Parent or Instance.new("Decal")
+Decal.Texture = "rbxassetid://13333189503" -- Texture not loading
+Decal.Texture = DecalService:GetImageFromId(13333189503) -- Texture loading
+Decal.Parent = game.Players.LocalPlayer.Character.Head
+
+
+-- Example GetAssetFromLink:
+local Decal = script.Parent or Instance.new("Decal")
+Decal.Texture = DecalService:GetAssetFromLink("https://i.ibb.co/DgKhrZJh/IMG-20250130-WA0026.jpg")
+Decal.Parent = game.Players.LocalPlayer.Character.Head
