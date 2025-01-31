@@ -54,7 +54,7 @@ end
 function DecalService:DependentWith(decal, instance) 
   if not decal or typeof(instance) ~= "Instance" then return end
     if instance:IsA("Decal") or instance:IsA("Texture") then
-instance.Changed:Connect(function(property)
+return instance.Changed:Connect(function(property)
  decal.Texture = instance.Texture
  decal.Color3 = instance.Color3
  decal.Transparency = instance.Transparency
@@ -62,7 +62,7 @@ instance.Changed:Connect(function(property)
  decal.LocalTransparencyModifier = instance.LocalTransparencyModifier
 end)
   elseif instance:IsA("BasePart") then
-instance.Changed:Connect(function(property)
+return instance.Changed:Connect(function(property)
  decal.Color3 = instance.Color
  decal.Transparency = instance.Transparency
  decal.LocalTransparencyModifier = instance.LocalTransparencyModifier
