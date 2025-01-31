@@ -97,8 +97,7 @@ function DecalService:ImageChanged(decal, callback)
       end
     end
 
- decal:GetPropertyChangedSignal("Texture"):Connect(onTextureChanged)
-   onTextureChanged()
+ return decal:GetPropertyChangedSignal("Texture"):Connect(onTextureChanged)
 end
 
 return DecalService
