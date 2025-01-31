@@ -1,0 +1,34 @@
+# DecalService - service for working with textures.
+It is not suitable for such classes as: Sky and for textures for SpecialMesh, MeshPart.
+It is suitable only for Decal, Texture and GuiObjects
+
+# Explanation of functions:
+
+DecalService:GetImageFromId(id):
+Function gets images even if id does not load.
+The function is receives thumbnail this asset from the site through id
+
+DecalService:GetAssetFromLink(link):
+The function gets the image ID via a link.
+The image is suitable for .png, .jpg and similar types of files.
+The function only works with Synapse X functions.
+
+DecalService:FindPartWithId(id):
+Gets a part that has a texture with this ID.
+
+DecalService:AssetType(assetId):
+Gets the image type: RobloxAsset or File.
+
+DecalService:DependentWith(decal, instance):
+The function makes the texture depend on some part.
+For example, if the color of the part is black, then the texture will also be black.
+The dependent part cannot be a GuiObject.
+
+DecalService:CanLoad(decalId):
+Checks whether the image can load.
+Returns true or false.
+
+DecalService:ImageChanged(decal, callback):
+Makes a function that runs every time the image ID changes.
+The function returns the image ID.
+The function is RBXScriptConnection (Its mean you cant use :Disable, :Enable, :Fire, but you can use :Disconnect)
