@@ -51,4 +51,54 @@ warn("Non supported format")
  end
 end
 
+function DecalService:DependentWith(decal, instance) 
+  if not decal or typeof(instance) ~= "Instance" then return end
+    if instance:IsA("Decal") or instance:IsA("Texture") then
+instance.Changed:Connect(function(property)
+ decal.Texture = instance.Texture
+ decal.Color3 = instance.Color3
+ decal.Transparency = instance.Transparency
+ decal.ZIndex = instance.ZIndex
+ decal.LocalTransparencyModifier = instance.LocalTransparencyModifier
+end)
+  elseif instance:IsA("BasePart") then
+instance.Changed:Connect(function(property)
+ decal.Color3 = instance.Color
+ decal.Transparency = instance.Transparency
+ decal.LocalTransparencyModifier = instance.LocalTransparencyModifier
+end)
+ elseif instance:IsA("GuiObject") or decal:IsA("GuiObject") then
+error("Instances must be in 3D dimensions")
+   end
+end
+
+function DecalService:CanLoad(decalId)
+  if not decalId or type(decalId) ~= "number" then return false end
+  local assetId = "rbxassetid://".. decalId
+
+ local success, erro = pcall(function()
+     game:GetService("ContentProvider"):PreloadAsync({assetId})
+  end)
+
+  if not success then
+    return false
+  end
+
+  return true
+end
+
+function DecalService:ImageChanged(decal, callback)
+  if not decal or not decal["Texture"] or typeof(callback) ~= "function" then return end
+
+  local function onTextureChanged()
+    local texture = decal.Texture
+      if texture then
+        callback(texture)
+      end
+    end
+
+ decal:GetPropertyChangedSignal("Texture"):Connect(onTextureChanged)
+   onTextureChanged()
+end
+
 return DecalService
