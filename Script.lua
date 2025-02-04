@@ -100,4 +100,15 @@ function DecalService:ImageChanged(decal, callback)
  return decal:GetPropertyChangedSignal("Texture"):Connect(onTextureChanged)
 end
 
+function DecalService:GetXML(id)
+   local ID = string.gsub(id, "%D", "")
+   local link = "https://assetdelivery.roproxy.com/v1/asset?id=" .. ID
+     if link then
+   return game:HttpGetAsync(link) or game:GetService("HttpService"):GetAsync(link)
+     else
+   warn("Asset not found")
+   return
+     end
+end
+
 return DecalService
