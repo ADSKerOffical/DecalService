@@ -12,3 +12,17 @@ Decal.Parent = game.Players.LocalPlayer.Character.Head
 local Decal = script.Parent or Instance.new("Decal")
 Decal.Texture = DecalService:GetAssetFromLink("https://i.ibb.co/DgKhrZJh/IMG-20250130-WA0026.jpg")
 Decal.Parent = game.Players.LocalPlayer.Character.Head
+
+-- Example ImageChanged:
+local Decal = script.Parent or Instance.new("Decal")
+Decal.Parent = game.Players.LocalPlayer.Character.Head
+
+local con = DecalService:ImageChanged(Decal, function(newid)
+  print(newid)
+  Decal.Color3 = Color3.new(math.random(0, 1), math.random(0, 1), math.random(0, 1))
+end)
+
+Decal.Texture = "rbxassetid://13333189503"
+Decal.Texture = DecalService:GetImageFromId(13333189503)
+
+con:Disconnect()
