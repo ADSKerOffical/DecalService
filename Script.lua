@@ -29,25 +29,21 @@ function DecalService:FindPartWithId(id)
       end
     end
   end
- if isdeaca == nil then
-warn("Part with image with such id not found")
-return nil
- end
   return isdeaca
 end
 
 function DecalService:AssetType(assetId)
  if not assetId or typeof(assetId) ~= "string" then
 warn("Non supported format")
-  return nil
+  return "unknown"
  end
 
- if assetId:sub(1, 13) == "rbxassetid://" then
-  return "RobloxAsset"
-    elseif assetId:sub(1, 11) == "rbxasset://" then
-        return "File"
+ if assetId:sub(1, 10) == "rbxassetid" then
+  return "rbxassetid"
+    elseif assetId:sub(1, 8) == "rbxasset" then
+        return "rbxasset"
     else
-  return "Unknown"
+  return "unknown"
  end
 end
 
